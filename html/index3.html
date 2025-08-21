@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hearts create</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow-y: hidden;
+            background: linear-gradient(40deg, #ff99c8, #0096c7,#ff99c8);
+        }
+
+        .heart{
+            width: 120px;
+            height: 120px;
+            background-color: red;
+            position: relative;
+            rotate: 0deg;
+            /* border: 1px solid black; */
+            box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.4);
+            animation: heartbeat 1s ease-in-out infinite, colorchange 3s linear infinite;
+
+        }
+
+        .heart::before {
+            content: "";
+            width: 120px;
+            height: 120px;
+            background-color: inherit;
+            position: absolute;
+            /* border: 1px solid black; */
+            border-radius: 50%;
+            transform: translate(-50%, 0);
+        }
+
+        .heart::after {
+            content: "";
+            width: 120px;
+            height: 120px;
+            /* border: 1px solid black; */
+            background-color: inherit;
+            position: absolute;
+            border-radius: 50%;
+            transform: translate(0%, 50%);
+        }
+
+        h1 {
+            position: absolute;
+            top: 47%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+        }
+
+        h2 {
+            position: absolute;
+            top: 63%;
+            left: 51%;
+            font-size: 33px;
+            transform: translate(-50%, -50%);
+        }
+
+        @keyframes heartbeat {
+
+            0%,
+            100% {
+                transform: scale(1) rotate(134deg);
+            }
+
+            14% {
+                transform: scale(1.2) rotate(134deg);
+            }
+
+            28% {
+                transform: scale(1) rotate(134deg);
+            }
+
+            42% {
+                transform: scale(1.2) rotate(134deg);
+            }
+
+            70% {
+                transform: scale(1) rotate(134deg);
+            }
+        }
+
+        /* Color changing animation */
+        @keyframes colorchange {
+            0% {
+                background-color: red;
+            }
+
+            25% {
+                background-color: #08bdbd;
+            }
+
+            50% {
+                background-color: #80ed99;
+            }
+
+            75% {
+                background-color: #dd2d4a;
+            }
+
+            100% {
+                background-color: #9c6644;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="heart">
+    </div>
+    <h1>مِنْ أعماق قَلْبِك</h1>
+    <h2>فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ</h2>
+
+
+</body>
+
+</html>

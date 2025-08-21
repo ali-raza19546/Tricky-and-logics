@@ -1,0 +1,119 @@
+:root {
+    --bg: #0b0f18;
+    /* dark base */
+    --grain-opacity: 0.06;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: black;
+}
+
+canvas {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    overflow: hidden;
+    /* no scrollbars */
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+    color: #cbd5e1;
+}
+
+.stage {
+    position: fixed;
+    inset: 0;
+    isolation: isolate;
+    /* blend modes behave nicely */
+}
+
+/* Soft gradient backdrop */
+.backdrop {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(80vmax 80vmax at 10% 10%, #12203a 0%, transparent 60%),
+        radial-gradient(70vmax 70vmax at 90% 20%, #1a1030 0%, transparent 60%),
+        radial-gradient(60vmax 60vmax at 50% 100%, #0f1b2d 0%, transparent 60%),
+        linear-gradient(180deg, #0b0f18 0%, #0d1320 100%);
+    z-index: 0;
+}
+
+/* Blobs container */
+.blobs {
+    position: absolute;
+    inset: 0;
+    filter: none contrast(1.1);
+}
+
+.blob {
+    position: absolute;
+    width: 38vmax;
+    height: 38vmax;
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0.9;
+    mix-blend-mode: screen;
+    /* juicy color mixing */
+    will-change: transform;
+    /* default gradient, overridden inline by JS */
+    background: radial-gradient(circle at 35% 35%, hsl(200 90% 60%) 0%, hsl(200 90% 40%) 35%, transparent 60%);
+}
+
+/* Subtle grain overlay for texture */
+.grain {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+    mix-blend-mode: overlay;
+    opacity: var(--grain-opacity);
+}
+
+.grain::before {
+    content: "";
+    position: absolute;
+    inset: -50%;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAYAAABccqhmAAAABHNCSVQICAgIfAhkiAAAALZJREFUeJztwTEBAAAAwqD1Th6ph3zr4CayDNEogfYagup8N6F5SenAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgF8GQn0AAfYkUu8AAAAASUVORK5CYII=');
+    background-size: 256px 256px;
+    /* tiny noise */
+    animation: grainmove 18s steps(10) infinite;
+    opacity: 1;
+    filter: contrast(140%);
+}
+
+@keyframes grainmove {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+
+    100% {
+        transform: translate3d(-25%, -25%, 0);
+    }
+}
+
+/* Small helper text */
+.hint {
+    position: absolute;
+    left: 50%;
+    bottom: 18px;
+    transform: translateX(-50%);
+    font-size: 12px;
+    letter-spacing: 0.3px;
+    opacity: 0.7;
+    z-index: 3;
+    background: rgba(0, 0, 0, 0.25);
+    padding: 6px 10px;
+    border-radius: 999px;
+    backdrop-filter: blur(6px);
+}
